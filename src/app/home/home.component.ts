@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Oferta } from '../models/oferta.model';
 import { OfertasService } from '../services/ofertas.service';
 
 @Component({
@@ -8,12 +9,15 @@ import { OfertasService } from '../services/ofertas.service';
 })
 export class HomeComponent implements OnInit {
 
+  public offers: Array<Oferta> = [];
+
   constructor(
     private offerService: OfertasService
   ) { }
 
   ngOnInit(): void {
-    console.log(this.offerService.getOffers())
+    this.offers = this.offerService.getOffers();
+    console.log(this.offers[0].imagens[0].url)
   }
 
 }
