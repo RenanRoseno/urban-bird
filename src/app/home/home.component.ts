@@ -16,8 +16,24 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.offers = this.offerService.getOffers();
-    console.log(this.offers[0].imagens[0].url)
+    this.offerService.getOffersPromise()
+      .then(
+        (offers: Array<Oferta>) => this.offers = offers,
+      )
+      .catch(
+        (param => console.log(param.message))
+      )
+
+
+    this.offerService.getOffersPromiseAsync()
+      .then(
+        (offers: Array<Oferta>) => {
+          this.offers = offers;
+          console.log("3 seg após foi executada")
+        })
+      .catch(
+        (param => console.log(param.message))
+      )
   }
 
 }
