@@ -13,7 +13,14 @@ export class OfertasService {
   public getOffers(): Promise<Array<Oferta>> {
     return this.http.get('http://localhost:3000/ofertas?destaque=true')
       .toPromise()
-      .then((res: any) => res.json());
+      .then((res: any) => res);
+  }
+
+  
+  public getOffersByCategory(categoria: string): Promise<Array<Oferta>> {
+    return this.http.get('http://localhost:3000/ofertas?categoria='+categoria)
+      .toPromise()
+      .then((res: any) => res);
   }
 
   public getOffersPromise(): Promise<Array<Oferta>> {
